@@ -23,6 +23,7 @@ class MainWindow(ctk.CTk):
         self.geometry(f"{cfg.WINDOW_WIDTH}x{cfg.WINDOW_HEIGHT}")
         self.minsize(cfg.WINDOW_WIDTH, cfg.WINDOW_HEIGHT)
         self.resizable(False, False)
+        self.configure(fg_color=cfg.COLOR_BG)
 
         # 窗口居中
         self.update_idletasks()
@@ -32,29 +33,28 @@ class MainWindow(ctk.CTk):
         y = (screen_h - cfg.WINDOW_HEIGHT) // 2
         self.geometry(f"+{x}+{y}")
 
-        # 关闭按钮行为：最小化到托盘（由 tray.py 绑定）
+        # 关闭按钮行为：最小化到托盘
         self.protocol("WM_DELETE_WINDOW", self._on_close)
 
-        # ── 顶部标题 ──
-        self._title_label = ctk.CTkLabel(
+        # ── 顶部番茄图标 ──
+        self._icon_label = ctk.CTkLabel(
             self,
-            text="🍅 " + cfg.STR_APP_TITLE,
-            font=("Microsoft YaHei", 20, "bold"),
-            text_color=cfg.COLOR_ACCENT_WORK,
+            text="🍅",
+            font=("", 28),
         )
-        self._title_label.pack(pady=(20, 10))
+        self._icon_label.pack(pady=(24, 0))
 
         # ── 圆环进度条 ──
         self._progress_ring = ProgressRing(self, self._sm)
-        self._progress_ring.pack(pady=(0, 10))
+        self._progress_ring.pack(pady=(6, 14))
 
         # ── 今日番茄计数 ──
         self._session_counter = SessionCounter(self, self._sm)
-        self._session_counter.pack(pady=(0, 15))
+        self._session_counter.pack(pady=(0, 18))
 
         # ── 控制按钮 ──
         self._controls = ControlPanel(self, self._sm)
-        self._controls.pack(pady=(0, 15))
+        self._controls.pack(pady=(0, 20))
 
         # ── 设置面板 ──
         self._settings = SettingsPanel(self, self._sm)
@@ -68,4 +68,4 @@ class MainWindow(ctk.CTk):
 
     def _on_close(self):
         """点击关闭按钮时最小化到托盘"""
-        self.withdraw()  # 隐藏窗口而非退出
+        self.withdraw()

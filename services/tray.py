@@ -17,13 +17,13 @@ def _create_icon_image(size=64):
     # 红色圆形（番茄主体）
     draw.ellipse(
         [margin, margin + size // 6, size - margin, size - margin],
-        fill="#e94560",
+        fill="#e0554a",
     )
     # 绿色叶子（顶部小三角）
     leaf_top = (size // 2, margin)
     leaf_left = (size // 3, margin + size // 5)
     leaf_right = (size * 2 // 3, margin + size // 5)
-    draw.polygon([leaf_top, leaf_left, leaf_right], fill="#4caf84")
+    draw.polygon([leaf_top, leaf_left, leaf_right], fill="#7d9b76")
 
     return img
 

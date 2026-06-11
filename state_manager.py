@@ -176,7 +176,6 @@ class StateManager:
     def transition_phase(self):
         """阶段结束，自动切换到下一阶段"""
         s = self._state
-        now = time.time()
 
         if s.phase == "work":
             # 完成一个番茄

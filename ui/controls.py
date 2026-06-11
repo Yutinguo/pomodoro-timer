@@ -18,45 +18,45 @@ class ControlPanel(ctk.CTkFrame):
             self,
             text=cfg.STR_START,
             font=cfg.FONT_BUTTON,
-            width=120,
-            height=40,
-            corner_radius=20,
+            width=160,
+            height=44,
+            corner_radius=22,
             fg_color=cfg.COLOR_ACCENT_WORK,
-            hover_color=cfg.COLOR_BUTTON_HOVER,
-            text_color=cfg.COLOR_BUTTON_TEXT,
+            hover_color="#c94a40",
+            text_color="#ffffff",
             command=self._on_main_click,
         )
-        self._main_btn.pack(side="left", padx=6)
+        self._main_btn.pack(side="left", padx=8)
 
         # ── 重置按钮 ──
         self._reset_btn = ctk.CTkButton(
             self,
             text=cfg.STR_RESET,
             font=cfg.FONT_SMALL,
-            width=70,
-            height=40,
-            corner_radius=20,
+            width=60,
+            height=36,
+            corner_radius=18,
             fg_color=cfg.COLOR_BUTTON,
             hover_color=cfg.COLOR_BUTTON_HOVER,
-            text_color=cfg.COLOR_BUTTON_TEXT,
+            text_color=cfg.COLOR_TEXT_SECONDARY,
             command=self._sm.reset,
         )
-        self._reset_btn.pack(side="left", padx=6)
+        self._reset_btn.pack(side="left", padx=5)
 
         # ── 跳过按钮 ──
         self._skip_btn = ctk.CTkButton(
             self,
             text=cfg.STR_SKIP,
             font=cfg.FONT_SMALL,
-            width=70,
-            height=40,
-            corner_radius=20,
+            width=60,
+            height=36,
+            corner_radius=18,
             fg_color=cfg.COLOR_BUTTON,
             hover_color=cfg.COLOR_BUTTON_HOVER,
-            text_color=cfg.COLOR_BUTTON_TEXT,
+            text_color=cfg.COLOR_TEXT_SECONDARY,
             command=self._sm.skip,
         )
-        self._skip_btn.pack(side="left", padx=6)
+        self._skip_btn.pack(side="left", padx=5)
 
         # 订阅状态
         self._sm.subscribe(self._on_state_changed)
@@ -68,29 +68,38 @@ class ControlPanel(ctk.CTkFrame):
     def _on_main_click(self):
         s = self._sm.state
         if s.phase == "paused":
-            self._sm.start()  # resume
+            self._sm.start()
         elif s.is_running:
             self._sm.pause()
         else:
             self._sm.start()
 
     def _update_buttons(self, state):
-        # 主按钮
         if state.is_running:
-            self._main_btn.configure(text=cfg.STR_PAUSE, fg_color="#e67e22")
+            self._main_btn.configure(
+                text=cfg.STR_PAUSE,
+                fg_color="#c9a96e",
+                hover_color="#b8934f",
+                text_color="#1a1412",
+            )
         elif state.phase == "paused":
-            self._main_btn.configure(text=cfg.STR_RESUME, fg_color=cfg.COLOR_ACCENT_WORK)
+            self._main_btn.configure(
+                text=cfg.STR_RESUME,
+                fg_color=cfg.COLOR_ACCENT_WORK,
+                hover_color="#c94a40",
+                text_color="#ffffff",
+            )
         else:
-            self._main_btn.configure(text=cfg.STR_START, fg_color=cfg.COLOR_ACCENT_WORK)
+            self._main_btn.configure(
+                text=cfg.STR_START,
+                fg_color=cfg.COLOR_ACCENT_WORK,
+                hover_color="#c94a40",
+                text_color="#ffffff",
+            )
 
-        # 跳过按钮：idle 时禁用
-        if state.phase == "idle":
-            self._skip_btn.configure(state="disabled")
-        else:
-            self._skip_btn.configure(state="normal")
-
-        # 重置按钮：idle 时禁用
         if state.phase == "idle":
             self._reset_btn.configure(state="disabled")
+            self._skip_btn.configure(state="disabled")
         else:
             self._reset_btn.configure(state="normal")
+            self._skip_btn.configure(state="normal")

@@ -13,19 +13,11 @@ class SettingsPanel(ctk.CTkFrame):
         super().__init__(parent, fg_color="transparent")
         self._sm = state_manager
 
-        # ── 窗口置顶开关 ──
-        self._top_var = ctk.BooleanVar(value=False)
-        self._top_switch = ctk.CTkSwitch(
-            self,
-            text=cfg.STR_ALWAYS_ON_TOP,
-            variable=self._top_var,
-            command=self._toggle_top,
-            font=cfg.FONT_SMALL,
-            text_color=cfg.COLOR_TEXT_SECONDARY,
-            fg_color=cfg.COLOR_TOGGLE_OFF,
-            progress_color=cfg.COLOR_TOGGLE_ON,
+        # 分隔线
+        self._separator = ctk.CTkFrame(
+            self, height=1, fg_color="#2a1f1b", width=300,
         )
-        self._top_switch.pack(side="left", padx=12)
+        self._separator.pack(pady=(0, 14))
 
         # ── 声音开关 ──
         self._sound_var = ctk.BooleanVar(value=True)
@@ -38,14 +30,31 @@ class SettingsPanel(ctk.CTkFrame):
             text_color=cfg.COLOR_TEXT_SECONDARY,
             fg_color=cfg.COLOR_TOGGLE_OFF,
             progress_color=cfg.COLOR_TOGGLE_ON,
+            button_color=cfg.COLOR_TEXT,
+            button_hover_color=cfg.COLOR_TEXT,
         )
-        self._sound_switch.pack(side="left", padx=12)
+        self._sound_switch.pack(side="left", padx=16)
+
+        # ── 窗口置顶开关 ──
+        self._top_var = ctk.BooleanVar(value=False)
+        self._top_switch = ctk.CTkSwitch(
+            self,
+            text=cfg.STR_ALWAYS_ON_TOP,
+            variable=self._top_var,
+            command=self._toggle_top,
+            font=cfg.FONT_SMALL,
+            text_color=cfg.COLOR_TEXT_SECONDARY,
+            fg_color=cfg.COLOR_TOGGLE_OFF,
+            progress_color=cfg.COLOR_TOGGLE_ON,
+            button_color=cfg.COLOR_TEXT,
+            button_hover_color=cfg.COLOR_TEXT,
+        )
+        self._top_switch.pack(side="left", padx=16)
 
         self._sm.subscribe(self._on_state_changed)
 
     def _toggle_top(self):
-        is_on = self._sm.toggle_always_on_top()
-        # 实际的置顶操作由 main_window 处理
+        self._sm.toggle_always_on_top()
 
     def _toggle_sound(self):
         self._sm.toggle_sound()

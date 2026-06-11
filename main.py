@@ -50,13 +50,13 @@ def _create_tomato_icon(path):
     # 番茄主体
     draw.ellipse(
         [margin, margin + 10, size - margin, size - margin],
-        fill="#e94560",
+        fill="#e0554a",
     )
     # 绿叶
     leaf_top = (size // 2, margin)
     leaf_left = (size // 3, margin + 12)
     leaf_right = (size * 2 // 3, margin + 12)
-    draw.polygon([leaf_top, leaf_left, leaf_right], fill="#4caf84")
+    draw.polygon([leaf_top, leaf_left, leaf_right], fill="#7d9b76")
 
     img.save(path, format="ICO", sizes=[(64, 64)])
 
