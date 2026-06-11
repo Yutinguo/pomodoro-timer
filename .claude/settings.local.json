@@ -12,7 +12,29 @@
       "Bash(curl -sL \"https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md\")",
       "Bash(claude plugin *)",
       "Bash(head -6 \"C:\\\\\\\\Users\\\\\\\\Lenovo\\\\\\\\.claude\\\\\\\\skills\\\\\\\\frontend-design\\\\\\\\SKILL.md\")",
-      "Bash(wc -l \"C:\\\\\\\\Users\\\\\\\\Lenovo\\\\\\\\.claude\\\\\\\\skills\\\\\\\\frontend-design\\\\\\\\SKILL.md\")"
+      "Bash(wc -l \"C:\\\\\\\\Users\\\\\\\\Lenovo\\\\\\\\.claude\\\\\\\\skills\\\\\\\\frontend-design\\\\\\\\SKILL.md\")",
+      "Bash(curl -sL \"https://api.github.com/repos/jackwener/0penCLI/releases\")",
+      "Bash(python -c ' *)",
+      "Bash(curl -sLI \"https://github.com/jackwener/0penCLI/releases/download/v1.7.7/0penCLI_1.7.7_x64_en-US.msi\")",
+      "Bash(curl -sLI \"https://github.com/jackwener/0penCLI/releases/download/v1.7.7/0penCLI-Setup-1.7.7.exe\")",
+      "Bash(curl -sLI \"https://github.com/jackwener/0penCLI/releases/download/v1.7.7/0penCLI_1.7.7_x64-setup.exe\")",
+      "WebFetch(domain:newreleases.io)",
+      "Bash(curl -sL -H \"Accept: application/vnd.github+json\" \"https://api.github.com/repos/jackwener/0penCLI/releases/tags/v1.7.7\")",
+      "Bash(curl -sL -H \"Accept: application/vnd.github+json\" \"https://api.github.com/repos/jackwener/0penCLI/releases?per_page=5\")",
+      "Bash(python3 -c ' *)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import winsound; winsound.Beep(880, 150); winsound.Beep(1100, 200)\""
+          }
+        ]
+      }
     ]
   }
 }
