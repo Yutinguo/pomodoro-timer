@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVomEoJPh7YPfmhR99bsId3LmhH1yh8BpJPMlRKouS3 guoyuting@stu.xmu.edu.cn'; Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::SetText\\($key\\); Write-Host \"Copied clean key to clipboard\")",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); ssh -T git@github.com 2>&1)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); $knownHosts = \"$env:USERPROFILE\\\\.ssh\\\\known_hosts\"; Write-Host \"=== Current known_hosts ===\"; if \\(Test-Path $knownHosts\\) { Get-Content $knownHosts } else { Write-Host \"\\(file does not exist\\)\" })"
+    ]
+  }
+}
